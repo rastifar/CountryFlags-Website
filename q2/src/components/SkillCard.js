@@ -9,25 +9,25 @@ import {
 import React, { useContext, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import {skillContext} from '../context/SkillContextProvider'
+import { skillContext } from "../context/SkillContextProvider";
 
-const SkillCard = ({ title, items }) => {
+const SkillCard = ({ title, items ,setShowEdit}) => {
   //context variable
   const { deleteSkill, editSkill, setSkill } = useContext(skillContext);
 
-  const handleShow = (item) => {   
-    setSkill({ ...item, edit: false })  
-   
-  }
-  const handleEdit = (item) => {   
-    setSkill({ ...item, edit: true })  
-    editSkill(item)
-  }
-  const handleDelete = (item) => { 
-    setSkill({})
-    deleteSkill(item.id)    
-  }
-  
+  const handleShow = (item) => {
+    setSkill(item);
+    // setShowEdit(false)
+  };
+  const handleEdit = (item) => {
+    setSkill(item);
+    setShowEdit(true)
+  };
+  const handleDelete = (item) => {
+    setSkill({});
+    deleteSkill(item.id);
+  };
+
   return (
     <div>
       <Typography
@@ -46,10 +46,8 @@ const SkillCard = ({ title, items }) => {
             <ListItemText primary={item.title} />
             <ListItemIcon onClick={() => handleEdit(item)}>
               <EditIcon />
-              
             </ListItemIcon>
 
-            {/* <IconButton onClick={() => deleteSkill(item.id)}> */}
             <IconButton onClick={() => handleDelete(item)}>
               <DeleteIcon />
             </IconButton>

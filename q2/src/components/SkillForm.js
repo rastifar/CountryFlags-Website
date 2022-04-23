@@ -1,34 +1,40 @@
 import React, { useContext, useRef, useState } from "react";
 import {
   MenuItem,
-  TextField,
-  Select,
-  InputLabel,
-  FormControl,
+  TextField,  
+  InputLabel,  
+  Button
 } from "@mui/material";
+import {skillContext} from '../context/SkillContextProvider'
 
 const SkillForm = () => {
-  const refTitle = useRef();
-  const refDesc = useRef();
-  const refSkill = useRef();
-
+  const { currentSkill, editSkill, setSkill,setCurrentSkill } = useContext(skillContext);
+ 
+ 
+  const handleEdit = () => {  
+    editSkill(currentSkill)
+  }
+  const handleChange = (e) => {
+    setSkill({...currentSkill,[e.target.name]:e.target.value})
+  }
   return (
     <>
       <TextField
-        inputRef={refTitle}
+       name="title"
         fullWidth
         required
         color="primary"
         label="Title"
         variant="standard"
         sx={{ my: ".5rem" }}
-        // onChange={handleChange}
-        // value={props.action==="Create"?"":"edit"}
+        onChange={handleChange}
+        value={currentSkill.title}
       />
-      <FormControl fullWidth>
+      
         <InputLabel id="selectSkills">Skills</InputLabel>
-        <Select
-          inputRef={refSkill}
+        <TextField
+          select
+         name="skills"
           fullWidth
           required
           label="Skills"
@@ -36,16 +42,16 @@ const SkillForm = () => {
           labelId="selectSkills"
           sx={{ my: "1rem" }}
           color="primary"
-          // onChange={handleChange}
-          // value={props.action==="Create"?"":"Web Design"}
+          onChange={handleChange}
+          value={currentSkill.skills}
         >
           <MenuItem value={"Web Design"}>Web Design</MenuItem>
           <MenuItem value={"Front-End"}>Front End</MenuItem>
           <MenuItem value={"Back-End"}>Back End</MenuItem>
-        </Select>
-      </FormControl>
+        </TextField>
+     
       <TextField
-        inputRef={refDesc}
+        name="description"
         fullWidth
         required
         multiline
@@ -54,11 +60,13 @@ const SkillForm = () => {
         color="primary"
         variant="standard"
         sx={{ my: ".5rem" }}
-        // onChange={handleChange}
-        // value={props.action==="Create"?"":"edit"}
+        onChange={handleChange}
+        value={currentSkill.description}
       />
+      <Button onClick={handleEdit}>Edit</Button>
     </>
   );
 };
 
 export default SkillForm;
+

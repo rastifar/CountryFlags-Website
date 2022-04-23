@@ -124,10 +124,11 @@
 //country detail
 .country-details-container {
   font-size: $Detail-Page;
-  height: calc(100vh - 8vh);
+  height: max-content;
   overflow: hidden;
   .country-details-layout {
     margin: 3rem 3rem;
+    
 
     .back-to-countries {
       margin-bottom: 3rem;
@@ -144,7 +145,8 @@
   .country-details-image {
     flex-basis: 45%;
     img {
-      width: 100%;
+      width: 85%;
+      object-fit: contain;
     }
   }
   .country-details-info {
@@ -162,13 +164,18 @@
 }
 .country-borders {
   margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  .country-borders-left {
+    margin-bottom: 20px;
+  }
 
   .country-borders-rigth {
     .country-link {
+      display: inline-block;
       width: max-content;
       padding: 7px 15px;
       border-radius: 2px;
-      margin: 0 0.4rem;
+      margin: 0.8rem 0.4rem;
       text-align: center;
       font-size: 15px;
     }

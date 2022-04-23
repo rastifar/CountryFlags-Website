@@ -30,7 +30,7 @@ const CountryInfo = () => {
     <div className={theme}>
       <div className="background text country-details-container">
         <div className="country-details-layout">
-          <Link to="/">
+          
             <div
               className="element text back-to-countries"
               onClick={backHandler}
@@ -42,7 +42,7 @@ const CountryInfo = () => {
                 <label>Back</label>
               </div>
             </div>
-          </Link>
+          
           <div className="flex country-details-content">
             <div className="country-details-image">
               <img src={country.flag} />

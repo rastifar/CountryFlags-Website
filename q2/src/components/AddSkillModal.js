@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useReducer, useRef, useState } from "react";
 import {
   Button,
   Dialog,
@@ -17,12 +17,11 @@ import {
 } from "@mui/material";
 import { AddCircleOutline, SettingsSuggestRounded } from "@mui/icons-material";
 import { skillContext } from "../context/SkillContextProvider";
-import SkillForm from './SkillForm'
 
 const AddSkillModal = (props) => {
   //context
   const { addSkill, skills, editSkill } = useContext(skillContext);
-  
+  // const { open, setOpen } = useContext(showModal);
   //App variable
   const refTitle = useRef();
   const refDesc = useRef();
@@ -44,21 +43,21 @@ const AddSkillModal = (props) => {
   
 
   const handleSubmit = () => {
-    // if (props.action === "Create") {
-    //   addSkill({
-    //     id: refTitle.current.value.toLowerCase(),
-    //     title: refTitle.current.value,
-    //     description: refDesc.current.value,
-    //     skills: refSkill.current.value,
-    //   });
-    //   handleClose();      
-    // }
-    // editSkill({
-    //   id: refTitle.current.value,
-    //   title: refTitle.current.value,
-    //   description: refDesc.current.value,
-    //   skills: refSkill.current.value,
-    // })
+    if (props.action === "Create") {
+      addSkill({
+        id: refTitle.current.value.toLowerCase(),
+        title: refTitle.current.value,
+        description: refDesc.current.value,
+        skills: refSkill.current.value,
+      });
+      handleClose();      
+    }
+    editSkill({
+      id: refTitle.current.value,
+      title: refTitle.current.value,
+      description: refDesc.current.value,
+      skills: refSkill.current.value,
+    })
     handleClose(); 
 
   };
@@ -76,7 +75,7 @@ const AddSkillModal = (props) => {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        
+        {props.showTitle?
         <DialogTitle id="responsive-dialog-title">
           {"Create a New Skills"}
 
@@ -84,10 +83,52 @@ const AddSkillModal = (props) => {
             Please fill out the form below.
           </Typography>
         </DialogTitle>
-          
+          :""}
         <DialogContent>
           <DialogContentText>
-         <SkillForm/>
+            <TextField
+              inputRef={refTitle}
+              fullWidth
+              required
+              color="primary"
+              label="Title"
+              variant="standard"
+              sx={{ my: ".5rem" }}
+              // onChange={handleChange}
+              // value={props.action==="Create"?"":"edit"}
+            />
+            <FormControl fullWidth>
+              <InputLabel id="selectSkills">Skills</InputLabel>
+              <Select
+                inputRef={refSkill}
+                fullWidth
+                required
+                label="Skills"
+                variant="standard"
+                labelId="selectSkills"
+                sx={{ my: "1rem" }}
+                color="primary"
+                // onChange={handleChange}
+                // value={props.action==="Create"?"":"Web Design"}
+              >
+                <MenuItem value={"Web Design"}>Web Design</MenuItem>
+                <MenuItem value={"Front-End"}>Front End</MenuItem>
+                <MenuItem value={"Back-End"}>Back End</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              inputRef={refDesc}
+              fullWidth
+              required
+              multiline
+              rows={4}
+              label="Description"
+              color="primary"
+              variant="standard"
+              sx={{ my: ".5rem" }}
+              // onChange={handleChange}
+              // value={props.action==="Create"?"":"edit"}
+            />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
