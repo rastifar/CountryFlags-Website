@@ -5,23 +5,25 @@ import {
   Typography,
   ListItemIcon,
   IconButton,
+  ListItemButton,
 } from "@mui/material";
 import React, { useContext, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { skillContext } from "../context/SkillContextProvider";
+import InboxIcon from "@mui/icons-material/Inbox";
 
-const SkillCard = ({ title, items ,setShowEdit}) => {
+const SkillCard = ({ title, items, setShowEdit }) => {
   //context variable
   const { deleteSkill, editSkill, setSkill } = useContext(skillContext);
 
   const handleShow = (item) => {
     setSkill(item);
-    // setShowEdit(false)
+    setShowEdit(false);
   };
   const handleEdit = (item) => {
     setSkill(item);
-    setShowEdit(true)
+    setShowEdit(true);
   };
   const handleDelete = (item) => {
     setSkill({});
@@ -38,19 +40,20 @@ const SkillCard = ({ title, items ,setShowEdit}) => {
       </Typography>
       <List component="ul">
         {items?.map((item) => (
-          <ListItem
-            sx={{ mx: ".5rem" }}
-            key={item.title}
-            onClick={() => handleShow(item)}
-          >
-            <ListItemText primary={item.title} />
-            <ListItemIcon onClick={() => handleEdit(item)}>
-              <EditIcon />
-            </ListItemIcon>
+          <ListItem sx={{ mx: ".5rem" }} key={item.title}>
+            <ListItemButton>
+              <ListItemText
+                primary={item.title}
+                onClick={() => handleShow(item)}
+              />
+              <IconButton onClick={() => handleEdit(item)}>
+                <EditIcon />
+              </IconButton>
 
-            <IconButton onClick={() => handleDelete(item)}>
-              <DeleteIcon />
-            </IconButton>
+              <IconButton onClick={() => handleDelete(item)}>
+                <DeleteIcon />
+              </IconButton>
+            </ListItemButton>
           </ListItem>
         ))}
       </List>
@@ -59,3 +62,17 @@ const SkillCard = ({ title, items ,setShowEdit}) => {
 };
 
 export default SkillCard;
+{
+  /* <ListItem disablePadding>
+<ListItemButton >
+  <ListItemText primary="Inbox" onClick={ handleShow} />
+  <IconButton onClick={ handleEdit}>
+    <EditIcon />
+  </IconButton>
+
+  <IconButton onClick={ handleDelete}>
+    <DeleteIcon />
+  </IconButton>
+</ListItemButton>
+</ListItem> */
+}
