@@ -72,6 +72,7 @@ const SkillContextProvider = ({ children }) => {
       });
     },
     editSkill: (item) => {
+      console.log(item);
       const updatedSkill = userSkills.filter((skill) => skill.id !== item.id);
       setUserSkills([...updatedSkill, item]);
     },

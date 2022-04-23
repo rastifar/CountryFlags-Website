@@ -28,8 +28,8 @@ const AddSkillModal = (props) => {
   const refSkill = useRef();
   //Modal variable
   const [open, setOpen] = React.useState(false);
-  
-  const[skill,setSkill] = useState({})
+
+  const [skill, setSkill] = useState({});
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -40,34 +40,23 @@ const AddSkillModal = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  
 
   const handleSubmit = () => {
-    if (props.action === "Create") {
-      addSkill({
-        id: refTitle.current.value.toLowerCase(),
-        title: refTitle.current.value,
-        description: refDesc.current.value,
-        skills: refSkill.current.value,
-      });
-      handleClose();      
-    }
-    editSkill({
-      id: refTitle.current.value,
+    addSkill({
+      id: refTitle.current.value.toLowerCase(),
       title: refTitle.current.value,
       description: refDesc.current.value,
       skills: refSkill.current.value,
-    })
-    handleClose(); 
-
+    });
+    handleClose();
   };
-// if(!open) return ''
+  
   return (
     <div>
-      <AddCircleOutline onClick={handleClickOpen} 
-        sx={{ color: "yellow", fontSize: "3.5rem" }}/>
-        
-       
+      <AddCircleOutline
+        onClick={handleClickOpen}
+        sx={{ color: "yellow", fontSize: "3.5rem" }}
+      />
 
       <Dialog
         fullScreen={fullScreen}
@@ -75,15 +64,17 @@ const AddSkillModal = (props) => {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        {props.showTitle?
-        <DialogTitle id="responsive-dialog-title">
-          {"Create a New Skills"}
+        {props.showTitle ? (
+          <DialogTitle id="responsive-dialog-title">
+            {"Create a New Skills"}
 
-          <Typography color="inherit" sx={{ mt: "1rem" }}>
-            Please fill out the form below.
-          </Typography>
-        </DialogTitle>
-          :""}
+            <Typography color="inherit" sx={{ mt: "1rem" }}>
+              Please fill out the form below.
+            </Typography>
+          </DialogTitle>
+        ) : (
+          ""
+        )}
         <DialogContent>
           <DialogContentText>
             <TextField
@@ -132,7 +123,7 @@ const AddSkillModal = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleSubmit} sx={{mr:'auto' }}>
+          <Button autoFocus onClick={handleSubmit} sx={{ mr: "auto" }}>
             {props.action}
           </Button>
         </DialogActions>

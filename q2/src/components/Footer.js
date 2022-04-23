@@ -8,27 +8,27 @@ const Footer = ({handleShow}) => {
 
   return (
     <div>
-      <BottomNavigation showLabels spacing="2">       
+      <BottomNavigation showLabels spacing="2" position="static">       
         <BottomNavigationAction
          onClick={() => handleShow("all")}
           label="All"
-          component="h1"
+         
           sx={{ fontSize: "1.5rem" }}
         />
         <BottomNavigationAction
          onClick={() => handleShow("webDesign")}
           label="Web Design"
-          component="h1"
+          
         />
         <BottomNavigationAction
            onClick={() => handleShow("frontEnd")}
           label="Front End"
-          component="h1"
+         
         />
         <BottomNavigationAction
           onClick={() => handleShow("backEnd")}
           label="Back End"
-          component="h1"
+          
         />
       </BottomNavigation>
     </div>

@@ -28,9 +28,9 @@ const Main = ({ showWebDesign, showFrontEnd, showBackEnd }) => {
       <Grid
         container
         spacing={2}
-        sx={{ height: "78vh", background: "pink", mt: "1px" }}
+        sx={{ background: "pink", mt: "1px" }}
       >
-        <Grid item xs={12} md={6} sx={{ mt: "15px" }}>
+        <Grid item xs={12} md={6} sx>
           {showWebDesign && (
             <SkillCard
               title="Web Desing"
@@ -58,17 +58,17 @@ const Main = ({ showWebDesign, showFrontEnd, showBackEnd }) => {
             {Object.keys(currentSkill).length !== 0 ? (
               <Typography
                 variant="h3"
-                sx={{ textAlign: "center", mt: "1.5rem" }}
+                sx={{ textAlign: "center", mt: "2rem" }}
               >
                 {currentSkill.title}
-                <Typography sx={{ mt: "1.5rem" }}>
+                <Typography sx={{ mt: "2rem" }}>
                   {currentSkill.description}
                 </Typography>
               </Typography>
             ) : (
               <Typography
                 variant="h3"
-                sx={{ textAlign: "center", flexGrow: 1, mt: "1.5rem" }}
+                sx={{ textAlign: "center", flexGrow: 1, mt: "2rem" }}
               >
                 Welcome!
                 <Typography>
@@ -79,7 +79,7 @@ const Main = ({ showWebDesign, showFrontEnd, showBackEnd }) => {
           </Grid>
         ) : (
           <Grid item xs={12} md={6}>
-            <SkillForm />
+            <SkillForm action="Edit"/>
           </Grid>
         )}
       </Grid>

@@ -15,7 +15,7 @@ import InboxIcon from "@mui/icons-material/Inbox";
 
 const SkillCard = ({ title, items, setShowEdit }) => {
   //context variable
-  const { deleteSkill, editSkill, setSkill } = useContext(skillContext);
+  const { deleteSkill, editSkill, setSkill,currentSkill } = useContext(skillContext);
 
   const handleShow = (item) => {
     setSkill(item);
@@ -24,9 +24,11 @@ const SkillCard = ({ title, items, setShowEdit }) => {
   const handleEdit = (item) => {
     setSkill(item);
     setShowEdit(true);
+   
   };
   const handleDelete = (item) => {
-    setSkill({});
+    setSkill('');
+    setShowEdit(false);
     deleteSkill(item.id);
   };
 
@@ -40,7 +42,7 @@ const SkillCard = ({ title, items, setShowEdit }) => {
       </Typography>
       <List component="ul">
         {items?.map((item) => (
-          <ListItem sx={{ mx: ".5rem" }} key={item.title}>
+          <ListItem  key={item.title}>
             <ListItemButton>
               <ListItemText
                 primary={item.title}
@@ -62,17 +64,6 @@ const SkillCard = ({ title, items, setShowEdit }) => {
 };
 
 export default SkillCard;
-{
-  /* <ListItem disablePadding>
-<ListItemButton >
-  <ListItemText primary="Inbox" onClick={ handleShow} />
-  <IconButton onClick={ handleEdit}>
-    <EditIcon />
-  </IconButton>
 
-  <IconButton onClick={ handleDelete}>
-    <DeleteIcon />
-  </IconButton>
-</ListItemButton>
-</ListItem> */
-}
+ 
+
